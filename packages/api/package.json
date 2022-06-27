@@ -1,0 +1,18 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "generate": "graphql-codegen"
+  },
+  "dependencies": {
+    "@prisma/client": "^3.15.2",
+    "apollo-server": "^3.9.0",
+    "graphql": "^16.5.0"
+  },
+  "devDependencies": {
+    "prisma": "^3.15.2"
+  }
+}

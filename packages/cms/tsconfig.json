@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "jsx": "react",
+    "outDir": "dist"
+  },
+}
