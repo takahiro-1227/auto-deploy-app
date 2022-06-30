@@ -5,14 +5,28 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
+    "build": "rm -rf dist/* && tsc && cp -R src/generated/client dist/generated/client",
+    "dev": "tsc-watch --noClear --onSuccess \"serverless offline --stage development\"",
     "generate": "graphql-codegen"
   },
   "dependencies": {
     "@prisma/client": "^3.15.2",
     "apollo-server": "^3.9.0",
-    "graphql": "^16.5.0"
+    "apollo-server-core": "^3.9.0",
+    "apollo-server-lambda": "^3.10.0",
+    "express": "^4.18.1",
+    "graphql": "^16.5.0",
+    "node-fetch": "2"
+  },
+  "prisma": {
+    "schema": "src/prisma/schema.prisma"
   },
   "devDependencies": {
-    "prisma": "^3.15.2"
+    "prisma": "^3.15.2",
+    "serverless": "^3.21.0",
+    "serverless-jetpack": "^0.11.1",
+    "serverless-offline": "^9.1.6",
+    "serverless-prune-plugin": "^2.0.1",
+    "tsc-watch": "^5.0.3"
   }
 }

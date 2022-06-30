@@ -1,0 +1,39 @@
+name: deploy-cms
+on:
+  push:
+      branches:
+        - 'master'
+      paths: 
+        - 'packages/cms/**'
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy-cms:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.16.0'
+      - uses: actions/cache@v3
+        with:
+          path: |
+            **/node_modules
+          key: node-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - run: yarn --frozen-lockfile
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.AWS_IAM_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - run: echo API_URL=$API_URL >> .env && yarn build
+        working-directory: ./packages/cms
+        env:
+          API_URL: ${{ secrets.API_URL }}
+      - run: aws s3 sync dist/ s3://${{ secrets.S3_CMS_BUCKET_NAME }} --delete --cache-control 'max-age=31536000,public,immutable'
+        working-directory: ./packages/cms

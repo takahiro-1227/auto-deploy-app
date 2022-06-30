@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  api:
+    image: node:16.16.0-alpine
+    container_name: auto-deploy-app.api
+    working_dir: /auto-deploy-app/packages/api
+    ports:
+      - 4000:4000
+    volumes:
+      - ../../package.json:/auto-deploy-app/package.json
+      - ../../tsconfig.json:/auto-deploy-app/tsconfig.json
+      - ../../yarn.lock:/auto-deploy-app/yarn.lock
+      - ./:/auto-deploy-app/packages/api
+      - /auto-deploy-app/packages/api/node_modules/
+      - /node_modules/
+    command: sh -c "yarn --frozen-lockfile && yarn prisma generate && yarn dev"
+    environment: 
+      - DATABASE_URL=${DATABASE_URL}
+  
+  database:
+    image: mysql:8.0
+    container_name: auto-deploy-app.database
+    command: mysqld --skip-character-set-client-handshake --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --ngram_token_size=2
+    environment: 
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER-${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - auto-deploy-app.volumes:/var/lib/mysql
+
+volumes:
+  auto-deploy-app.volumes:
+
+networks:
+  network:
+    name: auto-deploy-app
+
+

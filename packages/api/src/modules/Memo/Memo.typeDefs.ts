@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server';
+import { gql } from 'apollo-server-lambda';
 
 export const typeDefs = gql`
   type Memo {
@@ -11,7 +11,7 @@ export const typeDefs = gql`
   }
 
   type Query {
-    memos: [Memo]!
+    memos: [Memo!]!
     memoBySlug(slug: String!): Memo!
   }
 

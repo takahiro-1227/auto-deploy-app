@@ -2,26 +2,20 @@
 
 ## 使用技術
 docker
-AWS ECS 
-AWS Fargate
 React
 Apollo Server
-Express
-graphql-codegen
-TypeScript(api cms)
+GraphQL
+TypeScript
 MySQL
 Github Actions
-jest
 
-##　仕様
+## 仕様
 
-###　URL構造
+### URL構造
 #### /
 メモ一覧
-#### /create
+#### /create/
 新規メモ作成
-#### /[permalink]
+#### /[permalink]/
 メモ編集
-
-### テーブル構造
 
