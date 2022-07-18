@@ -1,7 +1,0 @@
-{
-  "name": "cms",
-  "version": "1.0.0",
-  "main": "./dist/index.js",
-  "license": "UNLICENSED",
-  "private": true
-}

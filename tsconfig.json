@@ -10,6 +10,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
+    "jsx": "react",
     "forceConsistentCasingInFileNames": true
   },
   "exclude": ["dist", "node_modules"],
