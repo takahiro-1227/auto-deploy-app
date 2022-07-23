@@ -1,0 +1,13 @@
+schema: '../api/src/modules/**/*.typeDefs.ts'
+documents:
+  - "src/**/*.tsx"
+  - "src/**/*.ts"
+watch:
+  - "src/**/*.tsx"
+  - "src/**/*.ts"
+generates:
+  ./src/generated/index.ts:
+    plugins: 
+      - typescript
+      - typescript-react-apollo
+      - typescript-operations

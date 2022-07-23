@@ -11,7 +11,7 @@ export const typeDefs = gql`
   }
 
   type Query {
-    memos: [Memo]!
+    memos: [Memo!]!
     memoBySlug(slug: String!): Memo!
   }
 

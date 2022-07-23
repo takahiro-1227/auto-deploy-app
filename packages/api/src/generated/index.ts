@@ -48,7 +48,7 @@ export type MutationUpdateMemoArgs = {
 export type Query = {
   __typename?: 'Query';
   memoBySlug: Memo;
-  memos: Array<Maybe<Memo>>;
+  memos: Array<Memo>;
 };
 
 
@@ -160,7 +160,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   memoBySlug?: Resolver<ResolversTypes['Memo'], ParentType, ContextType, RequireFields<QueryMemoBySlugArgs, 'slug'>>;
-  memos?: Resolver<Array<Maybe<ResolversTypes['Memo']>>, ParentType, ContextType>;
+  memos?: Resolver<Array<ResolversTypes['Memo']>, ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {

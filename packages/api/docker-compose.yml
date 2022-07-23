@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   api:
-    image: node:16.15.1-alpine
+    image: node:16.16.0-alpine
     container_name: auto-deploy-app.api
     working_dir: /auto-deploy-app/packages/api
     ports:
