@@ -1,6 +1,6 @@
-import React from "react";
+import React, { FC } from "react";
 
-export const Edit = () => {
+export const Edit: FC = () => {
   return (
     <div>Edit</div>
   )

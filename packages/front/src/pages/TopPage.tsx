@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import { gql } from '@apollo/client';
 import { useGetMemosQuery } from "../generated";
-import { NODE_ENV } from "../settings";
+import { Link } from 'react-router-dom';
 
 export const GET_MEMOS = gql`
  query getMemos {
@@ -33,6 +33,7 @@ export const TopPage: FC = () => {
   return (
     <>
       <div>topPage</div>
+      <Link to='create'>新規作成</Link>
       <ul>
         {data.memos.map(({id, title, slug}) => (
           <li key={id}>

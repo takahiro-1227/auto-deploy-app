@@ -58,6 +58,46 @@ export type QueryMemoBySlugArgs = {
 };
 
 
+export const CreateMemoDocument = gql`
+    mutation createMemo($slug: String!, $title: String!, $content: String!) {
+  createMemo(slug: $slug, title: $title, content: $content) {
+    id
+    slug
+    title
+    content
+    createdAt
+    updatedAt
+  }
+}
+    `;
+export type CreateMemoMutationFn = Apollo.MutationFunction<CreateMemoMutation, CreateMemoMutationVariables>;
+
+/**
+ * __useCreateMemoMutation__
+ *
+ * To run a mutation, you first call `useCreateMemoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateMemoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createMemoMutation, { data, loading, error }] = useCreateMemoMutation({
+ *   variables: {
+ *      slug: // value for 'slug'
+ *      title: // value for 'title'
+ *      content: // value for 'content'
+ *   },
+ * });
+ */
+export function useCreateMemoMutation(baseOptions?: Apollo.MutationHookOptions<CreateMemoMutation, CreateMemoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateMemoMutation, CreateMemoMutationVariables>(CreateMemoDocument, options);
+      }
+export type CreateMemoMutationHookResult = ReturnType<typeof useCreateMemoMutation>;
+export type CreateMemoMutationResult = Apollo.MutationResult<CreateMemoMutation>;
+export type CreateMemoMutationOptions = Apollo.BaseMutationOptions<CreateMemoMutation, CreateMemoMutationVariables>;
 export const GetMemosDocument = gql`
     query getMemos {
   memos {
@@ -97,6 +137,15 @@ export function useGetMemosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
 export type GetMemosQueryHookResult = ReturnType<typeof useGetMemosQuery>;
 export type GetMemosLazyQueryHookResult = ReturnType<typeof useGetMemosLazyQuery>;
 export type GetMemosQueryResult = Apollo.QueryResult<GetMemosQuery, GetMemosQueryVariables>;
+export type CreateMemoMutationVariables = Exact<{
+  slug: Scalars['String'];
+  title: Scalars['String'];
+  content: Scalars['String'];
+}>;
+
+
+export type CreateMemoMutation = { __typename?: 'Mutation', createMemo: { __typename?: 'Memo', id: number, slug: string, title: string, content: string, createdAt: string, updatedAt: string } };
+
 export type GetMemosQueryVariables = Exact<{ [key: string]: never; }>;
 
 
