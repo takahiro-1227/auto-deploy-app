@@ -28,13 +28,9 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     volumes:
-      - database:/var/lib/mysql
+      - auto-deploy-app.volumes:/var/lib/mysql
 
 volumes:
-  database:
-    name: auto-deploy-app.database
-    driver_opts:
-      type: tmpfs
-      device: tmpfs
+  auto-deploy-app.volumes:
 
 
