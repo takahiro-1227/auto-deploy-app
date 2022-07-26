@@ -16,7 +16,9 @@ export const GET_MEMOS = gql`
  }
 `
 export const TopPage: FC = () => {
-  const { loading, error, data } = useGetMemosQuery();
+  const { loading, error, data } = useGetMemosQuery({
+    fetchPolicy: 'no-cache',
+  });
   if (loading) {
     return <p>loading</p>;
   }

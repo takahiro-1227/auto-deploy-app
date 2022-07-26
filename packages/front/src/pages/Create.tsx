@@ -54,7 +54,7 @@ export const Create: FC = () => {
       console.error(error);
     }).finally(() => {
       setSaving(false);
-      navigate('/', {replace: true});
+      navigate('/', { replace: true });
     })
   }
 

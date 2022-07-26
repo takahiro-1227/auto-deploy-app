@@ -6,6 +6,7 @@ import { TopPage } from './pages/TopPage';
 import { Edit } from './pages/Edit';
 import { client } from './app/client';
 import { ApolloProvider } from '@apollo/client';
+import { NotFound } from './pages/NotFound';
 
 const root = ReactDOM.createRoot(
   document.getElementById('app') as HTMLElement
@@ -16,10 +17,9 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<TopPage />} />
-        <Route path="create" element={<Create/>}/> 
-        <Route path="edit">
-          <Route path=":slug" element={<Edit />}/>
-        </Route>
+        <Route path="/create" element={<Create/>}/> 
+        <Route path="/edit/:slug" element={<Edit />} />
+        <Route path='*' element={<NotFound />}/>
       </Routes>
     </BrowserRouter>
   </ApolloProvider>
