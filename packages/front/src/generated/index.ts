@@ -98,6 +98,87 @@ export function useCreateMemoMutation(baseOptions?: Apollo.MutationHookOptions<C
 export type CreateMemoMutationHookResult = ReturnType<typeof useCreateMemoMutation>;
 export type CreateMemoMutationResult = Apollo.MutationResult<CreateMemoMutation>;
 export type CreateMemoMutationOptions = Apollo.BaseMutationOptions<CreateMemoMutation, CreateMemoMutationVariables>;
+export const GetMemoBySlugDocument = gql`
+    query getMemoBySlug($slug: String!) {
+  memoBySlug(slug: $slug) {
+    id
+    slug
+    title
+    content
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+/**
+ * __useGetMemoBySlugQuery__
+ *
+ * To run a query within a React component, call `useGetMemoBySlugQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMemoBySlugQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMemoBySlugQuery({
+ *   variables: {
+ *      slug: // value for 'slug'
+ *   },
+ * });
+ */
+export function useGetMemoBySlugQuery(baseOptions: Apollo.QueryHookOptions<GetMemoBySlugQuery, GetMemoBySlugQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMemoBySlugQuery, GetMemoBySlugQueryVariables>(GetMemoBySlugDocument, options);
+      }
+export function useGetMemoBySlugLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMemoBySlugQuery, GetMemoBySlugQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMemoBySlugQuery, GetMemoBySlugQueryVariables>(GetMemoBySlugDocument, options);
+        }
+export type GetMemoBySlugQueryHookResult = ReturnType<typeof useGetMemoBySlugQuery>;
+export type GetMemoBySlugLazyQueryHookResult = ReturnType<typeof useGetMemoBySlugLazyQuery>;
+export type GetMemoBySlugQueryResult = Apollo.QueryResult<GetMemoBySlugQuery, GetMemoBySlugQueryVariables>;
+export const UpdateMemoDocument = gql`
+    mutation updateMemo($id: Int!, $slug: String!, $title: String!, $content: String!) {
+  updateMemo(id: $id, slug: $slug, title: $title, content: $content) {
+    id
+    slug
+    title
+    content
+    createdAt
+    updatedAt
+  }
+}
+    `;
+export type UpdateMemoMutationFn = Apollo.MutationFunction<UpdateMemoMutation, UpdateMemoMutationVariables>;
+
+/**
+ * __useUpdateMemoMutation__
+ *
+ * To run a mutation, you first call `useUpdateMemoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateMemoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateMemoMutation, { data, loading, error }] = useUpdateMemoMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      slug: // value for 'slug'
+ *      title: // value for 'title'
+ *      content: // value for 'content'
+ *   },
+ * });
+ */
+export function useUpdateMemoMutation(baseOptions?: Apollo.MutationHookOptions<UpdateMemoMutation, UpdateMemoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateMemoMutation, UpdateMemoMutationVariables>(UpdateMemoDocument, options);
+      }
+export type UpdateMemoMutationHookResult = ReturnType<typeof useUpdateMemoMutation>;
+export type UpdateMemoMutationResult = Apollo.MutationResult<UpdateMemoMutation>;
+export type UpdateMemoMutationOptions = Apollo.BaseMutationOptions<UpdateMemoMutation, UpdateMemoMutationVariables>;
 export const GetMemosDocument = gql`
     query getMemos {
   memos {
@@ -145,6 +226,23 @@ export type CreateMemoMutationVariables = Exact<{
 
 
 export type CreateMemoMutation = { __typename?: 'Mutation', createMemo: { __typename?: 'Memo', id: number, slug: string, title: string, content: string, createdAt: string, updatedAt: string } };
+
+export type GetMemoBySlugQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type GetMemoBySlugQuery = { __typename?: 'Query', memoBySlug: { __typename?: 'Memo', id: number, slug: string, title: string, content: string, createdAt: string, updatedAt: string } };
+
+export type UpdateMemoMutationVariables = Exact<{
+  id: Scalars['Int'];
+  slug: Scalars['String'];
+  title: Scalars['String'];
+  content: Scalars['String'];
+}>;
+
+
+export type UpdateMemoMutation = { __typename?: 'Mutation', updateMemo: { __typename?: 'Memo', id: number, slug: string, title: string, content: string, createdAt: string, updatedAt: string } };
 
 export type GetMemosQueryVariables = Exact<{ [key: string]: never; }>;
 

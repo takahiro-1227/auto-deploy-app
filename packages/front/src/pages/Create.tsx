@@ -49,18 +49,18 @@ export const Create: FC = () => {
       }
     }).then(() => {
       window.alert('メモを新規作成しました');
+      navigate('/', { replace: true });
     }).catch(error => {
       window.alert('メモの作成に失敗しました');
       console.error(error);
     }).finally(() => {
       setSaving(false);
-      navigate('/', { replace: true });
     })
   }
 
   return (
     <>
-      <p>create</p>
+      <h1>create</h1>
       <Link to='..'>トップに戻る</Link>
       <div>
         <TextField label="タイトル" value={title} onChange={event => setTitle(event.currentTarget.value)} {...textFieldProps}/>

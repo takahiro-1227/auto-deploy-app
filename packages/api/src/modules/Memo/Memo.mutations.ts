@@ -1,4 +1,3 @@
-import moment from "moment";
 import { Resolvers } from "../../generated";
 
 export const mutations: Resolvers["Mutation"] = {
@@ -13,7 +12,7 @@ export const mutations: Resolvers["Mutation"] = {
         slug,
         title,
         content,
-        updatedAt: moment().format('YYYY-MM-DD HH:MM:SS'),
+        updatedAt: new Date(),
       }
     })
   }

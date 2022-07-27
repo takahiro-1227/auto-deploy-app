@@ -34,7 +34,7 @@ export const TopPage: FC = () => {
 
   return (
     <>
-      <div>topPage</div>
+      <h1>topPage</h1>
       <Link to='create'>新規作成</Link>
       <ul>
         {data.memos.map(({id, title, slug}) => (
