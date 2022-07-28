@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  api:
+    image: node:16.16.0-alpine
+    container_name: auto-deploy-app.front
+    working_dir: /auto-deploy-app/packages/front
+    ports:
+      - 3000:3000
+    volumes:
+      - ../../package.json:/auto-deploy-app/package.json
+      - ../../tsconfig.json:/auto-deploy-app/tsconfig.json
+      - ../../yarn.lock:/auto-deploy-app/yarn.lock
+      - ./:/auto-deploy-app/packages/front
+      - /auto-deploy-app/packages/front/node_modules/
+      - /node_modules/
+    command: sh -c "yarn --frozen-lockfile && yarn dev"
+    environment: 
+      - API_URL=${API_URL}
+
+networks:
+  network:
+    name: auto-deploy-app

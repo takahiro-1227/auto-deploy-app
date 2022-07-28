@@ -33,4 +33,8 @@ services:
 volumes:
   auto-deploy-app.volumes:
 
+networks:
+  network:
+    name: auto-deploy-app
+
 
