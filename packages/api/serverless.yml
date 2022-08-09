@@ -1,0 +1,31 @@
+service: auto-deploy-app
+
+provider:
+  name: aws
+  stage: dev
+  region: ap-northeast-1
+  runtime: nodejs16.x
+  stackName: auto-deploy-app
+
+plugins: 
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    host: 0.0.0.0
+    httpPort: 4000
+    noPrependStageInUrl: true
+
+functions:
+  api:
+    handler: dist/index.handler
+    events:
+      - httpApi:
+          path: /
+          method: post
+      - httpApi:
+          path: /
+          method: get
+      - httpApi:
+          path: /.well-known/apollo/server-health
+          method: get
