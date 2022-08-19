@@ -1,4 +1,5 @@
 service: auto-deploy-app
+useDotenv: true
 
 provider:
   name: aws
@@ -6,11 +7,44 @@ provider:
   region: ap-northeast-1
   runtime: nodejs16.x
   stackName: auto-deploy-app
+  timeout: 30
+  vpc:
+    securityGroupIds:
+      - ${env:SECURITY_GROUP_ID}
+    subnetIds:
+      - ${env:PRIVATE_SUBNET_1_ID}
+      - ${env:PRIVATE_SUBNET_2_ID}
+  httpApi:
+    payload: '1.0'
+    cors:
+      allowCredentials: true
+      allowedOrigins: ${env:CORS_ORIGIN}
+
+  environment:
+    DATABASE_URL: ${env:DATABASE_URL}
 
 plugins: 
   - serverless-offline
+  - serverless-dotenv-plugin
+  - serverless-prune-plugin
+  - serverless-jetpack
+
+package:
+  exclude:
+    - dist/tsconfig.tsbuildinfo
+    - src/**
+    - .env
+    - codegen.yml
+    - docker-compose.yml
+    - package.json
+    - tsconfig.json
 
 custom:
+  prune:
+    automatic: true
+    number: 3
+  jetpack:
+    base: '../..'
   serverless-offline:
     host: 0.0.0.0
     httpPort: 4000
