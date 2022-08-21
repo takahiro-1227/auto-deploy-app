@@ -25,7 +25,6 @@ provider:
 
 plugins: 
   - serverless-offline
-  - serverless-dotenv-plugin
   - serverless-prune-plugin
   - serverless-jetpack
 
