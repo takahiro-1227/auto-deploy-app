@@ -5,21 +5,21 @@ on:
       - 'master'
     paths: 
       - 'packages/api/**'
-  jobs:
-    deploy-api:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
+jobs:
+  deploy-api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
-        - uses: actions/setup-node@v3
-          with:
-            node-version: '16.16.0'
-        - run: yarn --frozen-lockfile
-        - uses: aws-actions/configure-aws-credentials@v1
-          with:
-            role-to-assume: 
-            aws-region: ap-northeast-1
-        - run: cd packages/api
-        - run: yarn prisma generate
-        - run: yarn build
-        - run: yarn serverless deploy
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.16.0'
+      - run: yarn --frozen-lockfile
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: 
+          aws-region: ap-northeast-1
+      - run: cd packages/api
+      - run: yarn prisma generate
+      - run: yarn build
+      - run: yarn serverless deploy
