@@ -1,11 +1,11 @@
 name: deploy-api
 on:
-  - push:
+  push:
       branches:
         - 'master'
       paths: 
         - 'packages/api/**'
-  - workflow_dispatch
+  workflow_dispatch
 
 jobs:
   deploy-api:
