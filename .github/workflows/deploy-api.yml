@@ -31,3 +31,9 @@ jobs:
         working-directory: ./packages/api 
       - run: yarn serverless deploy
         working-directory: ./packages/api 
+        env:
+          SECURITY_GROUP_ID: ${{ secrets.SECURITY_GROUP_ID}} 
+          PRIVATE_SUBNET_1_ID: ${{ secrets.PRIVATE_SUBNET_1_ID}} 
+          PRIVATE_SUBNET_2_ID: ${{ secrets.PRIVATE_SUBNET_2_ID}} 
+          CORS_ORIGIN: ${{ secrets.CORS_ORIGIN}} 
+          DATABASE_URL: ${{ secrets.DATABASE_URL}} 
