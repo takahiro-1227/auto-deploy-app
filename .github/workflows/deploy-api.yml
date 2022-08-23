@@ -27,5 +27,6 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - run: cd packages/api
       - run: yarn prisma generate
+      - run: pwd
       - run: yarn build
       - run: yarn serverless deploy
