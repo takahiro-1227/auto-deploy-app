@@ -21,8 +21,6 @@ jobs:
         with:
           role-to-assume: ${{ secrets.AWS_IAM_ARN }}
           aws-region: ${{ secrets.AWS_REGION }}
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - run: cd packages/api
       - run: yarn prisma generate
       - run: yarn build
