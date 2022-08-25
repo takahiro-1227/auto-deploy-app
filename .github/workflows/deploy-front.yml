@@ -1,0 +1,35 @@
+name: deploy-front
+on:
+  push:
+      branches:
+        - 'master'
+      paths: 
+        - 'packages/front/**'
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy-front:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.16.0'
+      - run: yarn --frozen-lockfile
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.AWS_IAM_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - run: yarn build
+        working-directory: ./packages/front
+        env:
+          ${{ secrets.API_URL }}
+      - run: aws s3 sync dist/ s3://${{ secrets.S3_FRONT_BUCKET_NAME }} --delete --cache-control 'max-age=31536000,public,immutable'
+        working-directory: ./packages/front
+        env:
+          ${{ secrets.S3_FRONT_BUCKET_NAME }}
