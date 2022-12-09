@@ -56,9 +56,12 @@ functions:
       - httpApi:
           path: /
           method: post
+          cors: true
       - httpApi:
           path: /
           method: get
+          cors: true
       - httpApi:
           path: /.well-known/apollo/server-health
           method: get
+          cors: true
