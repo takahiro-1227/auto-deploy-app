@@ -1,4 +1,4 @@
-service: auto-deploy-app
+service: autoDeployApp
 useDotenv: true
 
 provider:
@@ -6,7 +6,7 @@ provider:
   stage: dev
   region: ap-northeast-1
   runtime: nodejs16.x
-  stackName: auto-deploy-app
+  stackName: autoDeployApp
   timeout: 30
   vpc:
     securityGroupIds:
