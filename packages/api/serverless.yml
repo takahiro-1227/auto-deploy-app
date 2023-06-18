@@ -6,7 +6,6 @@ provider:
   stage: dev
   region: ap-northeast-1
   runtime: nodejs16.x
-  stackName: autoDeployApp
   timeout: 30
   vpc:
     securityGroupIds:
