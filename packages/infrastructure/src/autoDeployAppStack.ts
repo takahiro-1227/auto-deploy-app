@@ -29,17 +29,25 @@ export class AutoDeployAppStack extends Stack {
 
     const databasePassword = SecretValue.ssmSecure('/auto-deploy-app/MYSQL_PASSWORD');
 
-    new rds.DatabaseInstance(this, 'autoDeployAppDatabase', {
-     engine: rds.DatabaseInstanceEngine.mysql({
+    const dbSecurityGroup = new ec2.SecurityGroup(this, 'dbSecurityGroup', {
+      vpc,
+      allowAllOutbound: true,
+    });
+
+    dbSecurityGroup.addIngressRule(ec2.Peer.ipv4(vpc.vpcCidrBlock), ec2.Port.tcp(3306), 'allow access from vpc');
+    
+    const db = new rds.DatabaseInstance(this, 'autoDeployAppDatabase', {
+      engine: rds.DatabaseInstanceEngine.mysql({
         version: rds.MysqlEngineVersion.VER_8_0_32,
-     }),
-     credentials: {
+      }),
+      credentials: {
         username: databaseUserName,
         password: databasePassword,
-     },
-     instanceType: ec2.InstanceType.of(ec2.InstanceClass.T3, ec2.InstanceSize.MICRO),
-     databaseName: 'auto_deploy_app',
-     vpc,
+      },
+      securityGroups: [dbSecurityGroup],
+      instanceType: ec2.InstanceType.of(ec2.InstanceClass.T3, ec2.InstanceSize.MICRO),
+      databaseName: 'auto_deploy_app',
+      vpc,
     });
   }
 }
