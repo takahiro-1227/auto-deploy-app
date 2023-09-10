@@ -1,10 +1,10 @@
-name: deploy-cms
+name: deploy-site
 on:
   push:
       branches:
         - 'master'
       paths: 
-        - 'packages/cms/**'
+        - 'packages/site/**'
   workflow_dispatch:
 
 permissions:
